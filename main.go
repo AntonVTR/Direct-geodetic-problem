@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"math"
 )
@@ -8,13 +9,12 @@ import (
 const r = 6371
 
 func main() {
-	fmt.Println("Start")
-	lat := 59.9199375
-	lon := 30.3410583
-	var b, d float64
-	b = 134
-	d = 632
-	fmt.Println(LatLonCalc(lat, lon, b, d))
+	lat := flag.Float64("lat", 59.9199375, "Lantitude value")
+	lon := flag.Float64("lon", 30.3410583, "Lontitude value")
+	b := flag.Float64("bear", 134, "Bearing to the point (degree)")
+	d := flag.Float64("dist", 632, "Distance to the point (km)")
+	flag.Parse()
+	fmt.Println(LatLonCalc(*lat, *lon, *b, *d))
 }
 
 func LatLonCalc(lat float64, lon float64, bearing float64, dist float64) (float64, float64) {
